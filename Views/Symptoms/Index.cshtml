@@ -1,0 +1,68 @@
+﻿@model IEnumerable<FYP.Models.Symptoms>
+
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+
+<div class="container-fluid pt-3" style="background-color:papayawhip">
+    <h2 class="m-0">
+        <b>Manage Symptoms</b>
+    </h2>
+    <a asp-action="Create" class="btn btn-success float-right">
+        <i class="fas fa-plus-circle "></i>
+        <span>
+            <strong>
+                Create New
+            </strong>
+        </span>
+    </a>
+</div>
+
+<div class="container-fluid pt-5" style="background-color:papayawhip">
+    <table class="table table-responsive-lg table-bordered table-hover table-striped" id="mytbl">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.SymtomsId" style="font-size:17px; color:lightseagreen; display:inline-block;margin-right:7px;" data-toggle="tooltip" title="Edit">
+                            <i class="fas fa-pencil-alt"></i>
+
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.SymtomsId" style="font-size:17px; color:orange; display:inline-block;margin-right:7px;" data-toggle="tooltip" title="Details">
+                            <i class="fas fa-book-alt"></i>
+
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.SymtomsId" style="font-size:17px; color:red; display:inline-block;margin-right:7px;" data-toggle="tooltip" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#mytbl').DataTable();
+    });
+</script>

@@ -1,0 +1,59 @@
+﻿@model FYP.Models.Diagnosis
+
+@{
+    Layout = null;
+}
+
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+
+
+<div class="container mt-5">
+    <h4>
+        <b>Detail Diagnosis</b>
+    </h4>
+    <hr />
+</div>
+<div class="container">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+      
+    </dl>
+    <div class="d-flex justify-content-between form-group form-row mt-4">
+
+        <a asp-action="Edit" asp-route-id="@Model.DiagnosisId" class="btn btn-primary mr-2">
+            <i class="fas fa-pencil-alt"></i>
+            <span>
+                <strong>Edit</strong>
+            </span>
+        </a>
+        <a asp-action="Index" class="btn btn-secondary mr-2">
+            <i class="fas fa-backspace"></i>
+            <span>
+                <strong>Back to List</strong>
+            </span>
+        </a>
+
+    </div>
+</div>

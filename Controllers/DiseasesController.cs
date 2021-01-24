@@ -54,7 +54,7 @@ namespace Medico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Disease disease)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Disease disease)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Medico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Disease disease)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Disease disease)
         {
             if (id != disease.Id)
             {

@@ -9,6 +9,10 @@ namespace FYP.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public ICollection<Cure> Cures { get; set; }
+        public ICollection<Diagnosis> Diagnoses { get; set; }
+        public ICollection<Precaution> Precautions { get; set; }
+        public ICollection<Symptoms> Symptoms { get; set; }
 
     }
 }

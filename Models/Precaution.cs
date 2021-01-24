@@ -10,5 +10,6 @@ namespace FYP.Models
         public int PrecautionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<Disease> Diseases { get; set; }
     }
 }

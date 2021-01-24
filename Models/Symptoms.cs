@@ -12,5 +12,6 @@ namespace FYP.Models
         public int SymtomsId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<Disease> Diseases { get; set; }
     }
 }

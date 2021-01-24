@@ -10,5 +10,6 @@ namespace FYP.Models
         public int DiagnosisId { get; set; }
         public DateTime Date { get; set; }
         public User User{ get; set; }
+        public ICollection<Disease> Diseases { get; set; }
     }
 }

@@ -26,25 +26,19 @@ namespace Medico.Data
 
 
 
-        public DbSet<FYP.Models.Cure> Cure { get; set; }
+        public DbSet<FYP.Models.Cure> Cures { get; set; }
 
-        public DbSet<FYP.Models.Diagnosis> Diagnosis { get; set; }
+        public DbSet<FYP.Models.Diagnosis> Diagnoses { get; set; }
 
-        public DbSet<FYP.Models.DiseaseCure> DiseaseCure { get; set; }
-
-        public DbSet<FYP.Models.DiseasePrecaution> DiseasePrecaution { get; set; }
-
-        public DbSet<FYP.Models.DiseaseSymptoms> DiseaseSymptoms { get; set; }
-
-        public DbSet<FYP.Models.Precaution> Precaution { get; set; }
+        public DbSet<FYP.Models.Precaution> Precautions { get; set; }
 
         public DbSet<FYP.Models.Symptoms> Symptoms { get; set; }
 
-        public DbSet<FYP.Models.User> User { get; set; }
+        public DbSet<FYP.Models.User> Users { get; set; }
 
-        public DbSet<FYP.Models.Disease> Disease { get; set; }
+        public DbSet<FYP.Models.Disease> Diseases { get; set; }
 
-        public DbSet<Medico.Models.DiagnoseDisease> DiagnoseDisease { get; set; }
+        public DbSet<Medico.Models.DiagnosedDisease> DiagnosedDiseases { get; set; }
 
 
 

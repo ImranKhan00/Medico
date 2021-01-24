@@ -22,7 +22,7 @@ namespace Medico.Controllers
         // GET: Diseases
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Disease.ToListAsync());
+            return View(await _context.Diseases.ToListAsync());
         }
 
         // GET: Diseases/Details/5
@@ -33,8 +33,8 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var disease = await _context.Disease
-                .FirstOrDefaultAsync(m => m.DiseaseId == id);
+            var disease = await _context.Diseases
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (disease == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Medico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DiseaseId,Name")] Disease disease)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Disease disease)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var disease = await _context.Disease.FindAsync(id);
+            var disease = await _context.Diseases.FindAsync(id);
             if (disease == null)
             {
                 return NotFound();
@@ -86,9 +86,9 @@ namespace Medico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DiseaseId,Name")] Disease disease)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Disease disease)
         {
-            if (id != disease.DiseaseId)
+            if (id != disease.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Medico.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DiseaseExists(disease.DiseaseId))
+                    if (!DiseaseExists(disease.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +124,8 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var disease = await _context.Disease
-                .FirstOrDefaultAsync(m => m.DiseaseId == id);
+            var disease = await _context.Diseases
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (disease == null)
             {
                 return NotFound();
@@ -139,15 +139,15 @@ namespace Medico.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var disease = await _context.Disease.FindAsync(id);
-            _context.Disease.Remove(disease);
+            var disease = await _context.Diseases.FindAsync(id);
+            _context.Diseases.Remove(disease);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DiseaseExists(int id)
         {
-            return _context.Disease.Any(e => e.DiseaseId == id);
+            return _context.Diseases.Any(e => e.Id == id);
         }
     }
 }

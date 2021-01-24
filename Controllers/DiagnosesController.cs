@@ -22,7 +22,7 @@ namespace Medico.Controllers
         // GET: Diagnoses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Diagnosis.ToListAsync());
+            return View(await _context.Diagnoses.ToListAsync());
         }
 
         // GET: Diagnoses/Details/5
@@ -33,7 +33,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var diagnosis = await _context.Diagnosis
+            var diagnosis = await _context.Diagnoses
                 .FirstOrDefaultAsync(m => m.DiagnosisId == id);
             if (diagnosis == null)
             {
@@ -73,7 +73,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var diagnosis = await _context.Diagnosis.FindAsync(id);
+            var diagnosis = await _context.Diagnoses.FindAsync(id);
             if (diagnosis == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var diagnosis = await _context.Diagnosis
+            var diagnosis = await _context.Diagnoses
                 .FirstOrDefaultAsync(m => m.DiagnosisId == id);
             if (diagnosis == null)
             {
@@ -139,15 +139,15 @@ namespace Medico.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var diagnosis = await _context.Diagnosis.FindAsync(id);
-            _context.Diagnosis.Remove(diagnosis);
+            var diagnosis = await _context.Diagnoses.FindAsync(id);
+            _context.Diagnoses.Remove(diagnosis);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DiagnosisExists(int id)
         {
-            return _context.Diagnosis.Any(e => e.DiagnosisId == id);
+            return _context.Diagnoses.Any(e => e.DiagnosisId == id);
         }
     }
 }

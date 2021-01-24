@@ -22,7 +22,7 @@ namespace Medico.Controllers
         // GET: Cures
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cure.ToListAsync());
+            return View(await _context.Cures.ToListAsync());
         }
 
         // GET: Cures/Details/5
@@ -33,7 +33,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var cure = await _context.Cure
+            var cure = await _context.Cures
                 .FirstOrDefaultAsync(m => m.CureId == id);
             if (cure == null)
             {
@@ -73,7 +73,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var cure = await _context.Cure.FindAsync(id);
+            var cure = await _context.Cures.FindAsync(id);
             if (cure == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var cure = await _context.Cure
+            var cure = await _context.Cures
                 .FirstOrDefaultAsync(m => m.CureId == id);
             if (cure == null)
             {
@@ -139,15 +139,15 @@ namespace Medico.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cure = await _context.Cure.FindAsync(id);
-            _context.Cure.Remove(cure);
+            var cure = await _context.Cures.FindAsync(id);
+            _context.Cures.Remove(cure);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CureExists(int id)
         {
-            return _context.Cure.Any(e => e.CureId == id);
+            return _context.Cures.Any(e => e.CureId == id);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace FYP.Models
     public class Cure
     {
         public int CureId { get; set; }
-        public string Name { get; set; }    
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

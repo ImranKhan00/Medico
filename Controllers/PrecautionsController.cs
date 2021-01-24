@@ -22,7 +22,7 @@ namespace Medico.Controllers
         // GET: Precautions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Precaution.ToListAsync());
+            return View(await _context.Precautions.ToListAsync());
         }
 
         // GET: Precautions/Details/5
@@ -33,7 +33,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var precaution = await _context.Precaution
+            var precaution = await _context.Precautions
                 .FirstOrDefaultAsync(m => m.PrecautionId == id);
             if (precaution == null)
             {
@@ -73,7 +73,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var precaution = await _context.Precaution.FindAsync(id);
+            var precaution = await _context.Precautions.FindAsync(id);
             if (precaution == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Medico.Controllers
                 return NotFound();
             }
 
-            var precaution = await _context.Precaution
+            var precaution = await _context.Precautions
                 .FirstOrDefaultAsync(m => m.PrecautionId == id);
             if (precaution == null)
             {
@@ -139,15 +139,15 @@ namespace Medico.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var precaution = await _context.Precaution.FindAsync(id);
-            _context.Precaution.Remove(precaution);
+            var precaution = await _context.Precautions.FindAsync(id);
+            _context.Precautions.Remove(precaution);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PrecautionExists(int id)
         {
-            return _context.Precaution.Any(e => e.PrecautionId == id);
+            return _context.Precautions.Any(e => e.PrecautionId == id);
         }
     }
 }

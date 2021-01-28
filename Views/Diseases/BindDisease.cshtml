@@ -1,0 +1,166 @@
+﻿@model FYP.Models.Disease
+
+<div style="margin-top:200px"></div>
+<h1>@Model.Name</h1>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <p>@Model.Description</p>
+        <div>
+            <strong>Cures</strong>
+            <div id="cures">
+                @if (Model.Cures != null)
+                {
+                    foreach (var item in Model.Cures)
+                    {
+                        <span>@item.Name,</span>
+                    }
+                }
+            </div>
+        </div>
+        <div>
+            <strong>Precautions</strong>
+            <div id="precautions">
+                @if (Model.Precautions != null)
+                {
+                    foreach (var item in Model.Precautions)
+                    {
+                        <span>@item.Name,</span>
+                    }
+                }
+            </div>
+        </div>
+        <div>
+            <strong>symptoms</strong>
+            <div id="symptoms">
+                @if (Model.Symptoms != null)
+                {
+                    foreach (var item in Model.Symptoms)
+                    {
+                        <span>@item.Name,</span>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <strong>Cures</strong>
+            <div>
+                <select name="cure" class="form-control" asp-items="@(new SelectList(ViewBag.cures,"CureId","Name"))"></select>
+
+                @if (ViewBag.cures.Count > 0)
+                {
+                    <button type="button" class="btn btn-success" onclick="addCure()">Add Cure</button>}
+            </div>
+        </div>
+        <div>
+            <strong>Precautions</strong>
+            <div>
+                <select name="precaution" class="form-control" asp-items="@(new SelectList(ViewBag.precautions, "PrecautionId", "Name"))"></select>
+
+                @if (ViewBag.precautions.Count > 0)
+                {
+                    <button type="button" class="btn btn-success" onclick="addPrecaution()">Add Precaution</button>
+                }
+            </div>
+        </div>
+        <div>
+            <strong>Symptoms</strong>
+            <div>
+
+                <select name="symptom" class="form-control" asp-items="@(new SelectList(ViewBag.symptoms, "SymptomId", "Name"))"></select>
+
+                @if (ViewBag.symptoms.Count > 0)
+                {
+                    <button type="button" class="btn btn-success" onclick="addSymptoms()">Add Symptom</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var diseaseId=@Model.Id;
+</script>
+
+<script>
+
+    function addCure() {
+        var selectedValue = $('select[name=cure]').val();
+        $.ajax({
+            type: "POST",
+            url: "/diseases/addcure",
+            data: { cureId: selectedValue, diseaseId: diseaseId },
+            success: function (data) {
+                console.log(data);
+                if (data.statusCode == 201) {
+                    //success
+                    $("#cures").append(data.data + ",");
+                }
+                else if (data.statusCode == 204) {
+                    //invalid id
+                }
+                else if (data.statusCode == 500) {
+                    //server error
+                }
+            },
+            error: function () {
+                //server error
+            }
+        });
+    }
+
+
+    function addPrecaution() {
+        var selectedValue = $('select[name=precaution]').val();
+        $.ajax({
+            type: "POST",
+            url: "/diseases/addprecaution",
+            data: { precautionId: selectedValue, diseaseId: diseaseId },
+            success: function (data) {
+                console.log(data);
+                if (data.statusCode == 201) {
+                    //success
+                    $("#precautions").append(data.data + ",");
+                }
+                else if (data.statusCode == 204) {
+                    //invalid id
+                }
+                else if (data.statusCode == 500) {
+                    //server error
+                }
+            },
+            error: function () {
+                //server error
+            }
+        });
+    }
+
+
+    function addSymptoms() {
+        var selectedValue = $('select[name=symptom]').val();
+        $.ajax({
+            type: "POST",
+            url: "/diseases/addsymptom",
+            data: { symptomId: selectedValue, diseaseId: diseaseId },
+            success: function (data) {
+                console.log(data);
+                if (data.statusCode == 201) {
+                    //success
+                    $("#symptoms").append(data.data + ",");
+                }
+                else if (data.statusCode == 204) {
+                    //invalid id
+                }
+                else if (data.statusCode == 500) {
+                    //server error
+                }
+            },
+            error: function () {
+                //server error
+            }
+        });
+    }
+</script>

@@ -34,7 +34,7 @@ namespace Medico.Controllers
             }
 
             var symptoms = await _context.Symptoms
-                .FirstOrDefaultAsync(m => m.SymtomsId == id);
+                .FirstOrDefaultAsync(m => m.SymptomId == id);
             if (symptoms == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Medico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SymtomsId,Name,Description")] Symptoms symptoms)
+        public async Task<IActionResult> Create([Bind("SymptomId,Name,Description")] Symptoms symptoms)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Medico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SymtomsId,Name,Description")] Symptoms symptoms)
+        public async Task<IActionResult> Edit(int id, [Bind("SymptomId,Name,Description")] Symptoms symptoms)
         {
-            if (id != symptoms.SymtomsId)
+            if (id != symptoms.SymptomId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Medico.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SymptomsExists(symptoms.SymtomsId))
+                    if (!SymptomsExists(symptoms.SymptomId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Medico.Controllers
             }
 
             var symptoms = await _context.Symptoms
-                .FirstOrDefaultAsync(m => m.SymtomsId == id);
+                .FirstOrDefaultAsync(m => m.SymptomId == id);
             if (symptoms == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace Medico.Controllers
 
         private bool SymptomsExists(int id)
         {
-            return _context.Symptoms.Any(e => e.SymtomsId == id);
+            return _context.Symptoms.Any(e => e.SymptomId == id);
         }
     }
 }

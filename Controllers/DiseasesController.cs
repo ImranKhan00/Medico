@@ -149,5 +149,78 @@ namespace Medico.Controllers
         {
             return _context.Diseases.Any(e => e.Id == id);
         }
+
+
+        [HttpGet]
+        public ActionResult BindDisease(int id)
+        {
+            ViewBag.cures = _context.Cures.ToList();
+            ViewBag.precautions = _context.Precautions.ToList();
+            ViewBag.symptoms = _context.Symptoms.ToList();
+            var disease = _context.Diseases.Include(x=>x.Cures).Include(x=>x.Precautions).Include(x=>x.Symptoms).FirstOrDefault(x=>x.Id==id);
+            return View(disease);
+        }
+
+        [HttpPost]
+        public JsonResult AddCure(int cureId, int diseaseId)
+        {
+            try
+            {
+                var cure = _context.Cures.Find(cureId);
+                var disease = _context.Diseases.Find(diseaseId);
+                if(cure==null) return Json(new { StatusCode = 204,  Message = "Invalid Cure id" });
+                if(disease==null) return Json(new { StatusCode = 204,  Message = "Invalid Disease id" });
+                if (disease.Cures == null) disease.Cures = new List<Cure>();
+                disease.Cures.Add(cure);
+                _context.Entry(disease).State = EntityState.Modified;
+                _context.SaveChanges();
+                return Json(new { StatusCode = 201,Data=cure.Name });
+            }
+            catch(Exception e)
+            {
+                return Json(new { StatusCode = 500, Data = e.StackTrace, Message = e.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult AddPrecaution(int precautionId, int diseaseId)
+        {
+            try
+            {
+                var precaution = _context.Precautions.Find(precautionId);
+                var disease = _context.Diseases.Find(diseaseId);
+                if(precaution == null) return Json(new { StatusCode = 204,  Message = "Invalid precaution  id" });
+                if(disease==null) return Json(new { StatusCode = 204,  Message = "Invalid Disease id" });
+                if (disease.Precautions == null) disease.Precautions = new List<Precaution>();
+                disease.Precautions.Add(precaution);
+                _context.Entry(disease).State = EntityState.Modified;
+                _context.SaveChanges();
+                return Json(new { StatusCode = 201,Data= precaution.Name });
+            }
+            catch(Exception e)
+            {
+                return Json(new { StatusCode = 500, Data = e.StackTrace, Message = e.Message });
+            }
+        }
+        [HttpPost]
+        public JsonResult AddSymptom(int symptomId, int diseaseId)
+        {
+            try
+            {
+                var symptom = _context.Symptoms.Find(symptomId);
+                var disease = _context.Diseases.Find(diseaseId);
+                if(symptom == null) return Json(new { StatusCode = 204,  Message = "Invalid symptom id" });
+                if(disease==null) return Json(new { StatusCode = 204,  Message = "Invalid Disease id" });
+                if (disease.Symptoms == null) disease.Symptoms = new List<Symptoms>();
+                disease.Symptoms.Add(symptom);
+                _context.Entry(disease).State = EntityState.Modified;
+                _context.SaveChanges();
+                return Json(new { StatusCode = 201,Data=symptom.Name });
+            }
+            catch(Exception e)
+            {
+                return Json(new { StatusCode = 500, Data = e.StackTrace, Message = e.Message });
+            }
+        }
+
     }
 }

@@ -209,3 +209,4 @@ C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\
 C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diagnoses\Details.cshtml.g.cs
 C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diagnoses\Edit.cshtml.g.cs
 C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diagnoses\Index.cshtml.g.cs
+C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diseases\BindDisease.cshtml.g.cs

@@ -1,0 +1,14 @@
+﻿@model Medico.ViewModel.DiagnosisViewModel
+
+<input type="range" min="18" max="150" value="18" class="slider" id="age-range" name="Age" onchange="updateAge()">
+<p>Age:<span id="ageCount"></span></p>
+
+
+
+
+@Html.HiddenFor(x => x.Symptoms)
+@Html.HiddenFor(x => x.Questions)
+@Html.HiddenFor(x => x.Answers)
+@Html.HiddenFor(x => x.Age)
+@Html.HiddenFor(x => x.Gender)
+

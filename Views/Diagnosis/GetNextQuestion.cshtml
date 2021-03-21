@@ -1,0 +1,24 @@
+﻿@model Medico.ViewModel.DiagnosisViewModel
+@{   int count = -1;
+    try { count = Model.Answers.Count; } catch { }
+}
+
+<label>@Model.Questions.ElementAt(count).Question</label>
+<br />
+<input type="radio" value="1" name="answer" />
+<label>Yes</label>
+<br />
+<input type="radio" value="0" name="answer" />
+<label>No</label>
+
+
+
+
+
+
+
+@Html.HiddenFor(x => x.Symptoms)
+@Html.HiddenFor(x => x.Questions)
+@Html.HiddenFor(x => x.Answers)
+@Html.HiddenFor(x => x.Age)
+@Html.HiddenFor(x => x.Gender)

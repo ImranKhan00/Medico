@@ -1,0 +1,21 @@
+﻿@model Medico.ViewModel.DiagnosisViewModel
+
+<select name="SymptomsList" id="symptoms" multiple>
+    @foreach (SelectListItem item in ViewBag.symptoms)
+    {
+        <option value="@item.Value">@item.Text</option>
+
+    }
+</select>
+
+
+@Html.HiddenFor(x => x.Symptoms)
+@Html.HiddenFor(x => x.Questions)
+@Html.HiddenFor(x => x.Answers)
+@Html.HiddenFor(x => x.Age)
+@Html.HiddenFor(x => x.Gender)
+
+
+
+<script>
+</script>

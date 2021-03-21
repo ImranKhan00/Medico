@@ -1,4 +1,4 @@
-﻿using FYP.Models;
+﻿using Medico.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

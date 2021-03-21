@@ -1,0 +1,16 @@
+﻿@model Medico.ViewModel.DiagnosisViewModel
+
+<input type="radio" id="male" name="gender" value="male">
+<label for="male">Male</label>
+<br>
+<input type="radio" id="female" name="gender" value="female">
+<label for="female">Female</label>
+<br>
+
+
+
+@Html.HiddenFor(x => x.Symptoms)
+@Html.HiddenFor(x => x.Questions)
+@Html.HiddenFor(x => x.Answers)
+@Html.HiddenFor(x => x.Age)
+@Html.HiddenFor(x => x.Gender)

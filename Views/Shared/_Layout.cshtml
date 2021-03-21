@@ -40,40 +40,38 @@
     <!-- [if lt IE 9] -->
 </head>
 <body class="clinic_version">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     @*<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Medico</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Disease" asp-action="Create">Disease</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Medico</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Disease" asp-action="Create">Disease</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>*@
+            </nav>
+        </header>*@
 
 
-    <!-- LOADER -->
-    <div id="preloader">
-        <img class="preloader" src="~/images/loaders/heart-loading2.gif" alt="">
-    </div>
+
     <!-- END LOADER -->
     <header>
         <div class="header-top wow fadeIn">
@@ -104,9 +102,12 @@
                             <li>
                                 <a data-scroll href="@Url.Action("Index","Symptoms")">Symptoms</a>
                             </li>
+                            <li>
+                                <a data-scroll href="@Url.Action("Index","Diagnosis")">Diagnosis</a>
+                            </li>
                             @*<li>
-                                <a data-scroll href="@Url.Action("Index","Users")">Users</a>
-                            </li>*@
+                                    <a data-scroll href="@Url.Action("Index","Users")">Users</a>
+                                </li>*@
                             <li>
                                 <a data-scroll href="@Url.Action("Index","Cures")">Cure</a>
                             </li>
@@ -114,14 +115,14 @@
                                 <a data-scroll href="@Url.Action("Index","Diagnoses")">Diagnoses</a>
                             </li>
                             @*<li>
-                                <a data-scroll href="@Url.Action("Index","DiagnoseDiseases")">DaignoseDisease</a>
-                            </li>*@
+                                    <a data-scroll href="@Url.Action("Index","DiagnoseDiseases")">DaignoseDisease</a>
+                                </li>*@
                             @*<li>
-                                <a data-scroll href="@Url.Action("Index","DiseaseCures")">DiseaseCures</a>
-                            </li>
-                            <li>
-                                <a data-scroll href="@Url.Action("Index","DiseasePrecautions")">DiseasePrecaution</a>
-                            </li>*@
+                                    <a data-scroll href="@Url.Action("Index","DiseaseCures")">DiseaseCures</a>
+                                </li>
+                                <li>
+                                    <a data-scroll href="@Url.Action("Index","DiseasePrecautions")">DiseasePrecaution</a>
+                                </li>*@
                             <li>
                                 <a data-scroll href="@Url.Action("Index","Precautions")">Precautions</a>
                             </li>
@@ -133,36 +134,30 @@
             </div>
             <!--Search Bar Hide-->
             @*<div class="serch-bar">
-                <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                        <input type="text" class="form-control input-lg" placeholder="Search" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="button">
-                                <i class="~/fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control input-lg" placeholder="Search" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-lg" type="button">
+                                    <i class="~/fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
         </div>
-    
+
     </header>
 
-    <div>
+    <div style="margin-top:160px">
         @RenderBody()
     </div>
 
 
     <a href="#home" data-scroll class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
     <!-- all js files -->
-    <script src="~/js/all.js"></script>
     <!-- all plugins -->
-    <script src="~/js/custom.js"></script>
     <!-- map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNUPWkb4Cjd7Wxo-T4uoUldFjoiUA1fJc&callback=myMap"></script>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

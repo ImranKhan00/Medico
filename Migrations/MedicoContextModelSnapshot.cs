@@ -79,7 +79,7 @@ namespace Medico.Migrations
                     b.ToTable("DiseaseSymptoms");
                 });
 
-            modelBuilder.Entity("FYP.Models.Cure", b =>
+            modelBuilder.Entity("Medico.Models.Cure", b =>
                 {
                     b.Property<int>("CureId")
                         .ValueGeneratedOnAdd()
@@ -95,80 +95,6 @@ namespace Medico.Migrations
                     b.HasKey("CureId");
 
                     b.ToTable("Cures");
-                });
-
-            modelBuilder.Entity("FYP.Models.Diagnosis", b =>
-                {
-                    b.Property<int>("DiagnosisId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DiagnosisId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Diagnoses");
-                });
-
-            modelBuilder.Entity("FYP.Models.Disease", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Diseases");
-                });
-
-            modelBuilder.Entity("FYP.Models.Precaution", b =>
-                {
-                    b.Property<int>("PrecautionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PrecautionId");
-
-                    b.ToTable("Precautions");
-                });
-
-            modelBuilder.Entity("FYP.Models.Symptoms", b =>
-                {
-                    b.Property<int>("SymptomId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SymptomId");
-
-                    b.ToTable("Symptoms");
                 });
 
             modelBuilder.Entity("Medico.Models.DiagnosedDisease", b =>
@@ -199,6 +125,100 @@ namespace Medico.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("DiagnosedDiseases");
+                });
+
+            modelBuilder.Entity("Medico.Models.Diagnosis", b =>
+                {
+                    b.Property<int>("DiagnosisId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("DiagnosisId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Diagnoses");
+                });
+
+            modelBuilder.Entity("Medico.Models.Disease", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Diseases");
+                });
+
+            modelBuilder.Entity("Medico.Models.Precaution", b =>
+                {
+                    b.Property<int>("PrecautionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PrecautionId");
+
+                    b.ToTable("Precautions");
+                });
+
+            modelBuilder.Entity("Medico.Models.Symptoms", b =>
+                {
+                    b.Property<int>("SymptomId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SymptomId");
+
+                    b.ToTable("Symptoms");
+                });
+
+            modelBuilder.Entity("Medico.Models.cSymptomQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SymptomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SymptomId");
+
+                    b.ToTable("SymptomQuestions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -407,7 +427,7 @@ namespace Medico.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FYP.Models.User", b =>
+            modelBuilder.Entity("Medico.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -428,13 +448,13 @@ namespace Medico.Migrations
 
             modelBuilder.Entity("CureDisease", b =>
                 {
-                    b.HasOne("FYP.Models.Cure", null)
+                    b.HasOne("Medico.Models.Cure", null)
                         .WithMany()
                         .HasForeignKey("CuresCureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FYP.Models.Disease", null)
+                    b.HasOne("Medico.Models.Disease", null)
                         .WithMany()
                         .HasForeignKey("DiseasesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -443,13 +463,13 @@ namespace Medico.Migrations
 
             modelBuilder.Entity("DiagnosisDisease", b =>
                 {
-                    b.HasOne("FYP.Models.Diagnosis", null)
+                    b.HasOne("Medico.Models.Diagnosis", null)
                         .WithMany()
                         .HasForeignKey("DiagnosesDiagnosisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FYP.Models.Disease", null)
+                    b.HasOne("Medico.Models.Disease", null)
                         .WithMany()
                         .HasForeignKey("DiseasesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -458,13 +478,13 @@ namespace Medico.Migrations
 
             modelBuilder.Entity("DiseasePrecaution", b =>
                 {
-                    b.HasOne("FYP.Models.Disease", null)
+                    b.HasOne("Medico.Models.Disease", null)
                         .WithMany()
                         .HasForeignKey("DiseasesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FYP.Models.Precaution", null)
+                    b.HasOne("Medico.Models.Precaution", null)
                         .WithMany()
                         .HasForeignKey("PrecautionsPrecautionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -473,39 +493,30 @@ namespace Medico.Migrations
 
             modelBuilder.Entity("DiseaseSymptoms", b =>
                 {
-                    b.HasOne("FYP.Models.Disease", null)
+                    b.HasOne("Medico.Models.Disease", null)
                         .WithMany()
                         .HasForeignKey("DiseasesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FYP.Models.Symptoms", null)
+                    b.HasOne("Medico.Models.Symptoms", null)
                         .WithMany()
                         .HasForeignKey("SymptomsSymptomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FYP.Models.Diagnosis", b =>
-                {
-                    b.HasOne("FYP.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Medico.Models.DiagnosedDisease", b =>
                 {
-                    b.HasOne("FYP.Models.Diagnosis", "Diagnosis")
+                    b.HasOne("Medico.Models.Diagnosis", "Diagnosis")
                         .WithMany()
                         .HasForeignKey("DiagnosisId");
 
-                    b.HasOne("FYP.Models.Disease", "Disease")
+                    b.HasOne("Medico.Models.Disease", "Disease")
                         .WithMany()
                         .HasForeignKey("DiseaseId");
 
-                    b.HasOne("FYP.Models.User", "User")
+                    b.HasOne("Medico.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
@@ -514,6 +525,24 @@ namespace Medico.Migrations
                     b.Navigation("Disease");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medico.Models.Diagnosis", b =>
+                {
+                    b.HasOne("Medico.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medico.Models.cSymptomQuestion", b =>
+                {
+                    b.HasOne("Medico.Models.Symptoms", "Symptom")
+                        .WithMany()
+                        .HasForeignKey("SymptomId");
+
+                    b.Navigation("Symptom");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

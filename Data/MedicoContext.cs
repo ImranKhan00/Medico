@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Medico.Models;
 
 namespace Medico.Data
 {
@@ -26,19 +21,21 @@ namespace Medico.Data
 
 
 
-        public DbSet<FYP.Models.Cure> Cures { get; set; }
+        public DbSet<Medico.Models.Cure> Cures { get; set; }
 
-        public DbSet<FYP.Models.Diagnosis> Diagnoses { get; set; }
+        public DbSet<Medico.Models.Diagnosis> Diagnoses { get; set; }
 
-        public DbSet<FYP.Models.Precaution> Precautions { get; set; }
+        public DbSet<Medico.Models.Precaution> Precautions { get; set; }
 
-        public DbSet<FYP.Models.Symptoms> Symptoms { get; set; }
+        public DbSet<Medico.Models.Symptoms> Symptoms { get; set; }
 
-        public DbSet<FYP.Models.User> Users { get; set; }
+        public new DbSet<Medico.Models.User> Users { get; set; }
 
-        public DbSet<FYP.Models.Disease> Diseases { get; set; }
+        public DbSet<Medico.Models.Disease> Diseases { get; set; }
 
         public DbSet<Medico.Models.DiagnosedDisease> DiagnosedDiseases { get; set; }
+        
+        public DbSet<Medico.Models.cSymptomQuestion> SymptomQuestions { get; set; }
 
 
 

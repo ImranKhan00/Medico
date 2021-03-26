@@ -159,5 +159,6 @@
     <!-- all plugins -->
     <!-- map -->
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @try { RenderSection("Scripts"); } catch { }
 </body>
 </html>

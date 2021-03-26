@@ -215,3 +215,4 @@ C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\
 C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diagnosis\GetGender.cshtml.g.cs
 C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diagnosis\GetNextQuestion.cshtml.g.cs
 C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diagnosis\GetSymptoms.cshtml.g.cs
+C:\Users\Imran Khan\source\repos\MedicoCopy\Medico\obj\Debug\net5.0\Razor\Views\Diseases\Cure.cshtml.g.cs

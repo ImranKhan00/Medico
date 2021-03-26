@@ -222,5 +222,14 @@ namespace Medico.Controllers
             }
         }
 
+        public ActionResult Cure(int? id)
+        {
+            List<Cure> cures = null;
+            if (id.HasValue)
+            {
+                cures = _context.Diseases.Include(x => x.Cures).FirstOrDefault(x => x.Id == id).Cures.ToList();
+            }
+            return View(cures);
+        }
     }
 }

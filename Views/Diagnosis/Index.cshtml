@@ -14,11 +14,9 @@
     var symptoms = [];
     $(document).ready(function () {
         //load get gender
-        Ajax({ url: "/diagnosis/getgender" })
-            .then(x => {
-                document.getElementById("main").innerHTML = x;
-                step = 0;
-            })
+
+        getPreviousScan();
+       
     });
     var step = 0;//0 step indicates user is on gender stage
     function next() {
@@ -57,7 +55,9 @@
         Ajax({ url: "/diagnosis/getQuestions", data: { SymptomsList: symptoms } })
             .then(x => {
                 console.log(x);
+                if (x.length == 0) return;
                 questions = x;
+                
                 step = 3;
                 if (x.length>0)document.getElementById("main").innerHTML = `
                     <label>${questions[0].question}</label>
@@ -91,46 +91,48 @@
                 document.getElementById("main").innerHTML = "<p>Loading Results...</p>"
                 Ajax({ url: "/diagnosis/GetResults", data: {questions, answers} })
                     .then(x => {
+
+                        setCookie('result', x);
+                        processResult(x);
                         //document.getElementById("main").innerHTML = x;
-                        var result = count(x);
-                        result.sort((a, b) => a.count > b.count ? 1 : -1);
-                        //dispaly
-                        var html = "<h5>Result</h5><ul>"
-                        result.forEach(x => {
-                            html += `<li>${x.name}</li>`
-                        })
-                        html += "</ul>";
-
-
-                        document.getElementById("main").innerHTML = html;
+                        
                     })
             }
         }
     }
-    //function find_duplicate_in_array(array) {
-    //    const count = {}
-    //    const result = []
-
-    //    array.forEach(item => {
-    //        if (count[item]) {
-    //            count[item] += 1
-    //            return
-    //        }
-    //        count[item] = 1
-    //    })
-
-    //    for (let prop in count) {
-    //        if (count[prop] >= 2) {
-    //            result.push(prop)
-    //        }
-    //    }
-
-    //    console.log(count)
-    //    return result;
-
-    //}
 
 
+    function processResult(x) {
+        var result = count(x);
+        result.sort((a, b) => a.count > b.count ? 1 : -1);
+        //debugger
+        //dispaly
+        var total = 0;
+        result.forEach(x => total += x.count)
+        var html = "<h5>Result</h5><ul>"
+        result.forEach(x => {
+            html += `<li>${x.obj.name}<span style='text-align:right'><a href='/diseases/cure/${x.obj.id}'>Cure</a></span>
+<input type="range" max="100" value="${(x.count / total) * 100}"></li>`
+        })
+        html += "</ul>";
+
+
+        document.getElementById("main").innerHTML = html;
+    }
+
+    function getPreviousScan() {
+        var cookieRes = getCookie('result');
+        if (cookieRes) {
+            processResult(JSON.parse(cookieRes));
+        }
+        else {
+            Ajax({ url: "/diagnosis/getgender" })
+                .then(x => {
+                    document.getElementById("main").innerHTML = x;
+                    step = 0;
+                });
+        }
+    }
     function count(array_elements) {
 
         var result__ = [];
@@ -141,7 +143,7 @@
         for (var i = 0; i < array_elements.length; i++) {
             if (array_elements[i] != current) {
                 if (cnt > 0) {
-                    result__.push({ name: current, count: cnt })
+                    result__.push({ obj: current, count: cnt, })
                 }
                 current = array_elements[i];
                 cnt = 1;
@@ -150,7 +152,7 @@
             }
         }
         if (cnt > 0) {
-            result__.push({ name: current, count: cnt })
+            result__.push({ obj: current, count: cnt })
         }
         return result__;
     }
@@ -178,5 +180,26 @@
         slider.oninput = function () {
             output.innerHTML = this.value;
         }
+    }
+
+    function setCookie(name, value) {
+        var expires = "";
+        days = 1;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (JSON.stringify(value) || "") + expires + "; path=/";
+    }
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
     }
 </script>

@@ -1,17 +1,23 @@
 ﻿using Medico.Models;
 using Medico.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Medico.Controllers
 {
     public class DiagnosisController : Controller
     {
+
+        const string SessionId = "_Name";
+        const string SessionAge = "_Age";
+        const string SessionGender= "_Gender";
         Data.MedicoContext db;
         public DiagnosisController(Medico.Data.MedicoContext context)
         {
@@ -41,6 +47,7 @@ namespace Medico.Controllers
         [HttpPost]
         public IActionResult GetGender(DiagnosisViewModel viewModel)
         {
+            HttpContext.Session.SetInt32(SessionAge, viewModel.Age);
             return View(viewModel);
         }
         
@@ -51,6 +58,19 @@ namespace Medico.Controllers
             var symptoms = db.Symptoms.Where(x => SymptomsList.Contains(x.SymptomId.ToString())).ToList();
             if (symptoms.Count > 0)
             {
+                Diagnosis diag = new Diagnosis
+                {
+                    Age = HttpContext.Session.GetInt32(SessionAge) ?? 0,
+                    Symptoms = symptoms,
+                    User = db.Users.FirstOrDefault(x => x.Id == this.User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                    Date = DateTime.UtcNow,
+                };
+
+                
+
+                db.Diagnoses.Add(diag);
+                db.SaveChanges();
+                HttpContext.Session.SetInt32(SessionId, diag.DiagnosisId);
                 return Json(db.SymptomQuestions.Where(x => symptoms.Contains(x.Symptom)).ToList());
             }
             return Json(new String[0]);
@@ -86,8 +106,16 @@ namespace Medico.Controllers
                 {
                     diseases.AddRange(x.Symptom.Diseases);
                 });
+                var id = HttpContext.Session.GetInt32(SessionId)??0;
+                if (id > 0)
+                {
+                    var diag = db.Diagnoses.Find(id);
+                    diag.Diseases = diseases;
+                    db.Diagnoses.Update(diag);
+                    db.SaveChanges();
+                }
 
-                return Json(diseases.Select(x=>x.Name));
+                return Json(diseases.Select(x=>new { x.Name, x.Id }));
             }catch(Exception e)
             {
                 return Json(e.Message);
